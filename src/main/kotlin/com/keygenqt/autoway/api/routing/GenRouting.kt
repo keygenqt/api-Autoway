@@ -30,9 +30,19 @@ fun Route.genRoute() {
 
     route("/*") {
         get {
+            val search = call.parameters["search"]
             val limit = call.parameters["limit"]?.toIntOrNull() ?: -1
             val offset = call.parameters["offset"]?.toIntOrNull() ?: 0
             call.respondText(service.getAll(call.request.uri.replace("/gen/", "").substringBefore("?"), limit, offset))
+        }
+        post {
+
+        }
+        put {
+
+        }
+        delete {
+
         }
     }
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.autoway.common.config
 
 import com.keygenqt.autoway.api.routing.apiRoute
@@ -34,10 +34,15 @@ fun Application.module() {
 
     // di
     startKoin {
-        printLogger()
+        // logger
         modules(
             moduleServicesDI,
         )
+    }
+
+    // logger
+    install(CallLogging) {
+        level = org.slf4j.event.Level.ERROR
     }
 
     // serialization

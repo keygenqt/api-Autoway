@@ -53,6 +53,7 @@ dependencies {
     implementation("io.ktor:ktor-html-builder:$ktorVersion")
     implementation("io.ktor:ktor-auth:$ktorVersion")
     implementation("io.ktor:ktor-locations:$ktorVersion")
+    implementation("ch.qos.logback:logback-classic:1.2.5")
 
     // exposed
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
@@ -74,4 +75,6 @@ dependencies {
     // tests
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.3")
 }

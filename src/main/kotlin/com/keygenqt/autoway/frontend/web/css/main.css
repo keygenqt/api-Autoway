@@ -1,0 +1,660 @@
+/*
+ * Copyright 2020 Vitaliy Zarubin
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*add google font*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+
+/*base design */
+#root {
+    height: 100%;
+    width: 100%;
+    color: #444444;
+}
+
+html,
+body {
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    margin: 0;
+    color: #444444;
+    background: #182848;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none !important;
+    text-decoration: none;
+}
+
+a {
+    color: #444444;
+    text-decoration: underline;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.btn {
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    vertical-align: top;
+    background: #4F5364;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    min-height: 45px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 5px;
+    padding: 17px 23px 15px;
+}
+
+.btn-green {
+    background: #0c9c4d;
+}
+
+/*table-base design */
+.container-table {
+    margin: auto;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.container-table .container-row {
+    display: table-row;
+}
+
+.container-table .container-row .container-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.container-table .container-row .container-cell.cell-header {
+    background: #182848;
+    color: white;
+    height: 100px;
+    padding: 40px 30px;
+}
+
+.container-table .container-row .container-cell.cell-header .container-body {
+    width: 1300px;
+    background: #182848;
+    display: block;
+    margin: 0 auto;
+}
+
+.container-table .container-row .container-cell.cell-body {
+    height: 100%;
+    color: #444444;
+}
+
+.container-table .container-row .container-cell.cell-body .container-body {
+    width: 1300px;
+    background: white;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    height: 100%;
+    padding: 60px;
+}
+
+.container-table .container-row .container-cell.cell-footer {
+    background: #182848;
+    color: white;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.container-table .container-row .container-cell.cell-footer .container-body {
+    width: 1300px;
+    background: #182848;
+    display: block;
+    margin: 0 auto;
+}
+
+/*MENU*/
+.menu {
+    padding: 0;
+    text-align: right;
+    margin: 0;
+    position: relative;
+}
+
+.menu-item {
+    display: inline-block;
+}
+
+.menu-links {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-links li {
+    display: inline-block;
+}
+
+.menu-links li.active a {
+    border-bottom: 1px #0aad58 solid;
+}
+
+.menu-links a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 3px 0;
+    margin: 0 13px;
+    text-transform: uppercase;
+    color: white;
+    font-size: 16px;
+}
+
+.menu-logo {
+    display: inline-block;
+    left: 0;
+    top: -7px;
+    position: absolute;
+    font-size: 26px;
+}
+
+.menu-logo a {
+    display: inline-block;
+    text-decoration: none;
+    color: #7c9de6;
+}
+
+.menu-logo span {
+    color: #0aad58;
+}
+
+/*INDEX*/
+.index-header-body {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    display: none;
+}
+
+.index-header-text {
+    font-size: 60px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    max-width: 860px;
+}
+
+.index-header-subtext {
+    font-size: 18px;
+    margin-bottom: 80px;
+}
+
+/*footer*/
+.index-footer-body {
+    padding: 30px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.index-footer-body .index-footer-text {
+    color: white;
+    display: inline-block;
+    font-size: 20px
+}
+
+.index-footer-body .index-footer-text .links {
+    padding-top: 20px;
+}
+
+.index-footer-body .index-footer-text .links a {
+    color: #0aad58;
+    text-decoration: none;
+}
+
+/*about*/
+.container-table .container-row .container-cell.cell-body .container-body.about-page-container {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-page {
+    width: 100%;
+    height: 100%;
+}
+
+.about-page-data {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 60px;
+    z-index: 2;
+    display: table;
+}
+
+.about-page-data .row {
+    display: table-row;
+}
+
+.about-page-data .cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.about-page-data .cell:last-child {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.about-page-data .phone img {
+    width: 90%;
+}
+
+.about-page-data .title {
+    color: #182848;
+    font-size: 60px;
+    margin-bottom: 60px;
+}
+
+.about-page-data .title span {
+    color: #0aad58;
+}
+
+.about-page-data .text {
+    font-size: 20px;
+    border-left: 2px solid #7c9de6;
+    padding-left: 30px;
+}
+
+.about-page-data .text li {
+    font-size: 16px;
+}
+
+.about-page-data .text h4 {
+    margin-bottom: 0px;
+}
+
+.about-page-container .about-page .round-top {
+    background: #7c9de6;
+    border-radius: 50%;
+    width: 1300px;
+    height: 1300px;
+    position: absolute;
+    right: -400px;
+    top: -1150px;
+}
+
+.about-page-container .about-page .round-bottom {
+    background: #7c9de6;
+    border-radius: 50%;
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    left: -100px;
+    bottom: -450px;
+}
+
+/*error*/
+.container-table .container-row .container-cell.cell-body .container-body.error-page {
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-color: #F8F9FC;
+}
+
+.error-page div.error-page-cell {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@-webkit-keyframes noise-anim {
+    0% {
+        clip: rect(10px, 9999px, 83px, 0);
+    }
+    5% {
+        clip: rect(2px, 9999px, 65px, 0);
+    }
+    10% {
+        clip: rect(8px, 9999px, 54px, 0);
+    }
+    15% {
+        clip: rect(24px, 9999px, 22px, 0);
+    }
+    20% {
+        clip: rect(19px, 9999px, 84px, 0);
+    }
+    25% {
+        clip: rect(19px, 9999px, 10px, 0);
+    }
+    30% {
+        clip: rect(27px, 9999px, 77px, 0);
+    }
+    35% {
+        clip: rect(74px, 9999px, 34px, 0);
+    }
+    40% {
+        clip: rect(34px, 9999px, 64px, 0);
+    }
+    45% {
+        clip: rect(83px, 9999px, 47px, 0);
+    }
+    50% {
+        clip: rect(23px, 9999px, 70px, 0);
+    }
+    55% {
+        clip: rect(55px, 9999px, 49px, 0);
+    }
+    60% {
+        clip: rect(90px, 9999px, 21px, 0);
+    }
+    65% {
+        clip: rect(58px, 9999px, 63px, 0);
+    }
+    70% {
+        clip: rect(77px, 9999px, 11px, 0);
+    }
+    75% {
+        clip: rect(6px, 9999px, 72px, 0);
+    }
+    80% {
+        clip: rect(27px, 9999px, 57px, 0);
+    }
+    85% {
+        clip: rect(89px, 9999px, 54px, 0);
+    }
+    90% {
+        clip: rect(55px, 9999px, 4px, 0);
+    }
+    95% {
+        clip: rect(36px, 9999px, 91px, 0);
+    }
+    100% {
+        clip: rect(19px, 9999px, 71px, 0);
+    }
+}
+
+@keyframes noise-anim {
+    0% {
+        clip: rect(10px, 9999px, 83px, 0);
+    }
+    5% {
+        clip: rect(2px, 9999px, 65px, 0);
+    }
+    10% {
+        clip: rect(8px, 9999px, 54px, 0);
+    }
+    15% {
+        clip: rect(24px, 9999px, 22px, 0);
+    }
+    20% {
+        clip: rect(19px, 9999px, 84px, 0);
+    }
+    25% {
+        clip: rect(19px, 9999px, 10px, 0);
+    }
+    30% {
+        clip: rect(27px, 9999px, 77px, 0);
+    }
+    35% {
+        clip: rect(74px, 9999px, 34px, 0);
+    }
+    40% {
+        clip: rect(34px, 9999px, 64px, 0);
+    }
+    45% {
+        clip: rect(83px, 9999px, 47px, 0);
+    }
+    50% {
+        clip: rect(23px, 9999px, 70px, 0);
+    }
+    55% {
+        clip: rect(55px, 9999px, 49px, 0);
+    }
+    60% {
+        clip: rect(90px, 9999px, 21px, 0);
+    }
+    65% {
+        clip: rect(58px, 9999px, 63px, 0);
+    }
+    70% {
+        clip: rect(77px, 9999px, 11px, 0);
+    }
+    75% {
+        clip: rect(6px, 9999px, 72px, 0);
+    }
+    80% {
+        clip: rect(27px, 9999px, 57px, 0);
+    }
+    85% {
+        clip: rect(89px, 9999px, 54px, 0);
+    }
+    90% {
+        clip: rect(55px, 9999px, 4px, 0);
+    }
+    95% {
+        clip: rect(36px, 9999px, 91px, 0);
+    }
+    100% {
+        clip: rect(19px, 9999px, 71px, 0);
+    }
+}
+
+@-webkit-keyframes noise-anim-2 {
+    0% {
+        clip: rect(37px, 9999px, 52px, 0);
+    }
+    5% {
+        clip: rect(77px, 9999px, 64px, 0);
+    }
+    10% {
+        clip: rect(22px, 9999px, 93px, 0);
+    }
+    15% {
+        clip: rect(38px, 9999px, 90px, 0);
+    }
+    20% {
+        clip: rect(17px, 9999px, 20px, 0);
+    }
+    25% {
+        clip: rect(20px, 9999px, 39px, 0);
+    }
+    30% {
+        clip: rect(55px, 9999px, 43px, 0);
+    }
+    35% {
+        clip: rect(72px, 9999px, 8px, 0);
+    }
+    40% {
+        clip: rect(17px, 9999px, 94px, 0);
+    }
+    45% {
+        clip: rect(87px, 9999px, 64px, 0);
+    }
+    50% {
+        clip: rect(54px, 9999px, 26px, 0);
+    }
+    55% {
+        clip: rect(89px, 9999px, 22px, 0);
+    }
+    60% {
+        clip: rect(3px, 9999px, 3px, 0);
+    }
+    65% {
+        clip: rect(60px, 9999px, 57px, 0);
+    }
+    70% {
+        clip: rect(68px, 9999px, 88px, 0);
+    }
+    75% {
+        clip: rect(39px, 9999px, 4px, 0);
+    }
+    80% {
+        clip: rect(40px, 9999px, 89px, 0);
+    }
+    85% {
+        clip: rect(1px, 9999px, 91px, 0);
+    }
+    90% {
+        clip: rect(31px, 9999px, 43px, 0);
+    }
+    95% {
+        clip: rect(51px, 9999px, 93px, 0);
+    }
+    100% {
+        clip: rect(21px, 9999px, 67px, 0);
+    }
+}
+
+@keyframes noise-anim-2 {
+    0% {
+        clip: rect(37px, 9999px, 52px, 0);
+    }
+    5% {
+        clip: rect(77px, 9999px, 64px, 0);
+    }
+    10% {
+        clip: rect(22px, 9999px, 93px, 0);
+    }
+    15% {
+        clip: rect(38px, 9999px, 90px, 0);
+    }
+    20% {
+        clip: rect(17px, 9999px, 20px, 0);
+    }
+    25% {
+        clip: rect(20px, 9999px, 39px, 0);
+    }
+    30% {
+        clip: rect(55px, 9999px, 43px, 0);
+    }
+    35% {
+        clip: rect(72px, 9999px, 8px, 0);
+    }
+    40% {
+        clip: rect(17px, 9999px, 94px, 0);
+    }
+    45% {
+        clip: rect(87px, 9999px, 64px, 0);
+    }
+    50% {
+        clip: rect(54px, 9999px, 26px, 0);
+    }
+    55% {
+        clip: rect(89px, 9999px, 22px, 0);
+    }
+    60% {
+        clip: rect(3px, 9999px, 3px, 0);
+    }
+    65% {
+        clip: rect(60px, 9999px, 57px, 0);
+    }
+    70% {
+        clip: rect(68px, 9999px, 88px, 0);
+    }
+    75% {
+        clip: rect(39px, 9999px, 4px, 0);
+    }
+    80% {
+        clip: rect(40px, 9999px, 89px, 0);
+    }
+    85% {
+        clip: rect(1px, 9999px, 91px, 0);
+    }
+    90% {
+        clip: rect(31px, 9999px, 43px, 0);
+    }
+    95% {
+        clip: rect(51px, 9999px, 93px, 0);
+    }
+    100% {
+        clip: rect(21px, 9999px, 67px, 0);
+    }
+}
+
+.error-page .error:before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: 1px 0 #4e73df;
+    top: 0;
+    color: #5a5c69;
+    background: #f8f9fc;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+.error-page .error:after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -1px 0 #e74a3b;
+    top: 0;
+    color: #5a5c69;
+    background: #f8f9fc;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+.error-page .error {
+    color: #5a5c69;
+    font-size: 7rem;
+    position: relative;
+    line-height: 1;
+    width: 12.5rem;
+    display: inline-block;
+}
+
+.error-page .text-gray-800 {
+    color: #5a5c69;
+}
+
+.error-page .mb-5 {
+    margin-bottom: 3rem;
+}
+
+.error-page .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.error-page .text-gray-500 {
+    color: #b7b9cc;
+    padding-bottom: 15px
+}
+
+.error-page a {
+    color: #4e73df;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.error-page a span {
+    position: relative;
+    top: -3px;
+}

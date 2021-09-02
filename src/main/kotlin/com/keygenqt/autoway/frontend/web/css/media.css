@@ -1,0 +1,86 @@
+/*
+ * Copyright 2020 Vitaliy Zarubin
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@media (max-width: 1390px) {
+    .container-table .container-row .container-cell.cell-header .container-body,
+    .container-table .container-row .container-cell.cell-body .container-body,
+    .container-table .container-row .container-cell.cell-footer .container-body {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .index-header-text {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 850px) {
+    .about-page-data .row {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .about-page-data .cell {
+        display: block;
+        width: 100%;
+    }
+
+    .about-page-data .phone img {
+        width: 60%;
+    }
+
+    .about-page-data .cell:last-child {
+        padding-left: 0;
+    }
+
+    .about-page-data .title {
+        margin-top: 40px;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .about-page-data .text {
+        border-top: 2px solid #ff961f;
+        padding-top: 30px;
+        border-left: none;
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .container-table .container-row .container-cell.cell-body .container-body {
+        padding: 30px;
+    }
+    .index-header-body {
+        margin-top: 25px;
+    }
+    .menu-logo {
+        display: block;
+        position: initial;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .menu {
+        text-align: center;
+    }
+    .about-page-data {
+        padding: 30px;
+    }
+    .about-page-data .phone img {
+        width: 100%;
+    }
+}

@@ -3,6 +3,8 @@ Autoway
 
 Backend autogeneration on migrations
 
+[Youtube](https://youtu.be/T2mAoSaemZ0)
+
 ![picture](data/vokoscreen-2021-09-02_09-53-37.gif)
 
 # License

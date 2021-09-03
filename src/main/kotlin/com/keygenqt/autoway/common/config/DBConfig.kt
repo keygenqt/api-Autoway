@@ -16,19 +16,31 @@
  
 package com.keygenqt.autoway.common.config
 
+import com.keygenqt.autoway.common.util.AppArgParser
+import com.keygenqt.autoway.common.util.Mode
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.slf4j.LoggerFactory
+import java.io.File
 import javax.sql.DataSource
 
 object DBConfig {
 
     private val log = LoggerFactory.getLogger(this::class.java)
+    private const val nameDb = "autoway.db"
 
     fun connectAndMigrate() {
+        if (AppArgParser.mode == Mode.COLD) {
+            val file = File("${AppArgParser.migration}/$nameDb")
+            if (file.isFile) {
+                log.info("Remove database")
+                file.delete()
+            }
+        }
+
         log.info("Initialising database")
         val dataSource = hikari()
         Database.connect(dataSource)
@@ -38,7 +50,7 @@ object DBConfig {
     private fun hikari(): DataSource {
         val config = HikariConfig().apply {
             driverClassName = "org.sqlite.JDBC"
-            jdbcUrl = "jdbc:sqlite:/home/keygenqt/migration/autoway.db"
+            jdbcUrl = "jdbc:sqlite:${AppArgParser.migration}/$nameDb"
             validate()
         }
         return HikariDataSource(config)
@@ -46,7 +58,7 @@ object DBConfig {
 
     private fun runFlyway(datasource: DataSource) {
         val flyway = Flyway.configure()
-            .locations("filesystem:/home/keygenqt/migration")
+            .locations("filesystem:${AppArgParser.migration}")
             .dataSource(datasource)
             .load()
         try {

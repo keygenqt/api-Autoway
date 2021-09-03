@@ -1,9 +1,21 @@
 Autoway
 ===================
 
-Backend autogeneration on migrations
+Backend auto-generation on migrations
 
-[Youtube](https://youtu.be/T2mAoSaemZ0)
+### Idea
+
+
+[Youtube alpha-demo](https://youtu.be/T2mAoSaemZ0)
+
+### Architecture
+* Framework - [Ktor](https://ktor.io/)
+* DI - [Koin](https://insert-koin.io/)
+* Protocol - [HTTP (REST API)](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+* Data Base - [SQLite](https://www.sqlite.org/index.html)
+* Migration - [Flyway](https://flywaydb.org/)
+* Template -  [kotlinx-html](https://github.com/Kotlin/kotlinx.html)
+* CLI -  [kotlinx-cli](https://github.com/Kotlin/kotlinx-cli)
 
 ![picture](data/vokoscreen-2021-09-02_09-53-37.gif)
 

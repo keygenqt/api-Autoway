@@ -5,7 +5,7 @@ Backend auto-generation on migrations
 
 [![picture](data/images/btn.png)](https://github.com/keygenqt/api-Autoway/raw/master/data/release/Autoway-0.0.1-all.jar)
 
-[![picture](data/images/btn_y.png)](https://youtu.be/HHQzB457xmI)
+[![picture](data/images/btn_youtube.png)](https://youtu.be/HHQzB457xmI)
 
 ### Idea
 

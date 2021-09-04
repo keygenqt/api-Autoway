@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.autoway.extensions
 
 import com.google.gson.JsonObject
+import io.ktor.http.*
 import java.sql.ResultSet
 
 enum class Type {
@@ -46,5 +47,33 @@ fun Map<String, Type>.toJsonObject(rs: ResultSet): JsonObject {
                 Type.TIMESTAMP -> addProperty(it.key, rs.getTimestamp(it.key).time / 1000)
             }
         }
+    }
+}
+
+fun Map<String, Type>.toKeysList(p: Parameters): String? = map {
+    if (p.contains(it.key)) {
+        it.key
+    } else {
+        null
+    }
+}.filterNotNull().let {
+    if (it.isEmpty()) {
+        null
+    } else {
+        it.joinToString(", ")
+    }
+}
+
+fun Map<String, Type>.toValuesList(p: Parameters): String? = map {
+    if (p.contains(it.key)) {
+        "'${p[it.key].toString()}'"
+    } else {
+        null
+    }
+}.filterNotNull().let {
+    if (it.isEmpty()) {
+        null
+    } else {
+        it.joinToString(", ")
     }
 }

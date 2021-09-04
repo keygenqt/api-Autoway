@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.autoway.api.routing
 
+import com.google.gson.JsonObject
+import com.keygenqt.autoway.common.base.ResponseError
+import com.keygenqt.autoway.common.base.ResponseSuccess
 import com.keygenqt.autoway.common.service.CommonService
 import com.keygenqt.autoway.extensions.toPrettyString
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
@@ -44,6 +48,28 @@ fun Route.genRoute() {
             call.parameters["table"]
                 ?.let { service.getModel(it, call.parameters["id"]!!) }
                 ?.let { call.respondText(it.toPrettyString()) }
+                ?: call.respond(HttpStatusCode.NotFound)
+        }
+        post {
+            call.parameters["table"]
+                ?.let { service.create(it, call.receiveParameters()) }
+                .let {
+                    when (it) {
+                        is JsonObject -> call.respondText(it.toPrettyString())
+                        is ResponseError -> call.respond(HttpStatusCode.UnprocessableEntity, it)
+                        else -> call.respond(HttpStatusCode.NotFound)
+                    }
+                }
+        }
+        delete("/{id}") {
+            call.parameters["table"]
+                ?.let { service.delete(it, call.parameters["id"]!!) }
+                ?.let {
+                    call.respond(
+                        status = HttpStatusCode.OK,
+                        message = ResponseSuccess("Model deleted successfully")
+                    )
+                }
                 ?: call.respond(HttpStatusCode.NotFound)
         }
     }

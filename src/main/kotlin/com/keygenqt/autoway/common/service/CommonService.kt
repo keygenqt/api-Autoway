@@ -13,20 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.autoway.common.service
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.keygenqt.autoway.common.base.BaseService
+import com.keygenqt.autoway.common.base.ResponseError
 import com.keygenqt.autoway.common.config.DBConfig.dbQuery
-import com.keygenqt.autoway.extensions.Type
 import com.keygenqt.autoway.extensions.toJsonObject
+import com.keygenqt.autoway.extensions.toKeysList
 import com.keygenqt.autoway.extensions.toLike
-import org.slf4j.LoggerFactory
+import com.keygenqt.autoway.extensions.toValuesList
+import io.ktor.http.*
+import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.sqlite.SQLiteException
 
 
-class CommonService: BaseService() {
+class CommonService : BaseService() {
 
     suspend fun find(table: String, limit: Int, offset: Int, search: String?): JsonArray? = dbQuery {
         columns(table)?.let { columns ->
@@ -51,5 +56,43 @@ class CommonService: BaseService() {
                 }
             }
         }?.let { if (it.size() == 0) null else it }
+    }
+
+    suspend fun delete(table: String, id: String): Boolean? = dbQuery {
+        pk(table)?.let { pk ->
+            var result: Boolean? = null
+            exec("SELECT * FROM $table WHERE $pk='$id'") { rs ->
+                while (rs.next()) {
+                    exec("DELETE FROM $table WHERE $pk='$id'")
+                    result = true
+                    break
+                }
+            }
+            result
+        }
+    }
+
+    suspend fun create(table: String, parameters: Parameters): Any? = newSuspendedTransaction {
+        columns(table)?.let { columns ->
+            columns.toKeysList(parameters)?.let { keys ->
+                val values = columns.toValuesList(parameters)!!
+                try {
+                    var id = ""
+
+                    exec("insert into $table ($keys) values ($values)")
+
+                    exec("select last_insert_rowid()") { rs ->
+                        id = rs.getString("last_insert_rowid()")
+                    }
+
+                    commit()
+
+                    getModel(table, id)
+
+                } catch (ex: Exception) {
+                    ResponseError(ex.message ?: "Error model params")
+                }
+            }
+        }
     }
 }

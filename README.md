@@ -1,6 +1,8 @@
 Autoway
 ===================
 
+![picture](data/images/preview.png)
+
 Backend auto-generation on migrations
 
 [![picture](data/images/btn.png)](https://github.com/keygenqt/api-Autoway/raw/master/data/release/Autoway-0.0.1-all.jar)

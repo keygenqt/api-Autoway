@@ -16,11 +16,10 @@
  
 package com.keygenqt.autoway.common.config
 
-import com.keygenqt.autoway.api.routing.apiRoute
+import com.keygenqt.autoway.routing.apiRoute
 import com.keygenqt.autoway.common.base.ResponseError
 import com.keygenqt.autoway.common.di.moduleServicesDI
 import com.keygenqt.autoway.common.util.JsonMapper
-import com.keygenqt.autoway.frontend.routing.frontendRoute
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -66,7 +65,5 @@ fun Application.module() {
 
     install(Routing) {
         apiRoute()
-        frontendRoute()
     }
-
 }

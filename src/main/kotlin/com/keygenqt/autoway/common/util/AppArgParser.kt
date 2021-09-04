@@ -39,13 +39,13 @@ object AppArgParser {
     val port by argParser.option(
         ArgType.Int,
         fullName = "port",
-        description = "Port localhost"
+        description = "Port host"
     ).default(9090)
 
     val domain by argParser.option(
         ArgType.String,
         fullName = "domain",
-        description = "Domain ip"
+        description = "Domain/IP"
     ).default("localhost")
 
     val isDebug by argParser.option(

@@ -5,19 +5,33 @@ Backend auto-generation on migrations
 
 ### Idea
 
+Replacing mocks with a full-fledged rest backend. Everything works out of the box, the application just needs to specify
+the path to [Flyway](https://flywaydb.org/) migrations.
 
-[Youtube alpha-demo](https://youtu.be/T2mAoSaemZ0)
+### Method
+
+* GET = /gen/{table}?search={string}&limit={int}&offset={int} (for list)
+* GET = /gen/{table}/{id} (for view)
+* POST = /gen/{table} (application/x-www-form-urlencoded body for create)
+* PUT = /gen/{table}/{id} (for update)
+* DELETE = /gen/{table}/{id} (for delete)
+
+### Options
+
+* migration - Path to directory with sql migrations (required)
+* domain - Domain/IP (optional, default - localhost)
+* port - Port host (optional, default - 9090)
+* mode - Rebuild db after start? COLD - rebuild (optional, default - HOT)
+* debug - Enable logging (optional)
 
 ### Architecture
+
 * Framework - [Ktor](https://ktor.io/)
 * DI - [Koin](https://insert-koin.io/)
 * Protocol - [HTTP (REST API)](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
 * Data Base - [SQLite](https://www.sqlite.org/index.html)
 * Migration - [Flyway](https://flywaydb.org/)
-* Template -  [kotlinx-html](https://github.com/Kotlin/kotlinx.html)
 * CLI -  [kotlinx-cli](https://github.com/Kotlin/kotlinx-cli)
-
-![picture](data/vokoscreen-2021-09-02_09-53-37.gif)
 
 # License
 

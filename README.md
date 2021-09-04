@@ -11,7 +11,7 @@ Backend auto-generation on migrations
 
 ### Idea
 
-Replacing mocks with a full-fledged rest backend. Everything works out of the box, the application just needs to specify
+Replacing mocks with a full-fledged REST backend. Everything works out of the box, the application just needs to specify
 the path to [Flyway](https://flywaydb.org/) migrations.
 
 ### Method

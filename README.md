@@ -3,6 +3,8 @@ Autoway
 
 Backend auto-generation on migrations
 
+[![picture](data/images/btn.png)](https://keygenqt.medium.com)
+
 ### Idea
 
 Replacing mocks with a full-fledged rest backend. Everything works out of the box, the application just needs to specify
@@ -21,8 +23,33 @@ the path to [Flyway](https://flywaydb.org/) migrations.
 * migration - Path to directory with sql migrations (required)
 * domain - Domain/IP (optional, default - localhost)
 * port - Port host (optional, default - 9090)
-* mode - Rebuild db after start? COLD - rebuild (optional, default - HOT)
+* mode - Rebuild db after start? *cold* - rebuild (optional, default - *hot*)
 * debug - Enable logging (optional)
+
+#### Usage:
+
+```
+## just run
+java -jar Autoway-0.0.1-all.jar --migration /path/to/your/migrations/dir
+
+## cold mode
+java -jar Autoway-0.0.1-all.jar --migration /path/to/your/migrations/dir --mode cold
+
+## debug
+java -jar Autoway-0.0.1-all.jar --migration /path/to/your/migrations/dir --debug
+```
+
+#### Command line:
+```
+Usage: Autoway options_list
+Options: 
+    --migration -> Path to directory with sql migrations (for flyway) (always required) { String }
+    --port [9090] -> Port host { Int }
+    --domain [localhost] -> Domain/IP { String }
+    --debug [false] -> Debug mode 
+    --mode [HOT] -> Start mode { Value should be one of [cold, hot] }
+    --help, -h -> Usage info 
+```
 
 ### Architecture
 

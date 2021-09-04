@@ -16,43 +16,40 @@
  
 package com.keygenqt.autoway.common.service
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
-import com.google.gson.JsonParser
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
-import org.json.simple.JSONArray
-import org.json.simple.JSONObject
+import com.google.gson.JsonObject
+import com.keygenqt.autoway.common.base.BaseService
+import com.keygenqt.autoway.common.config.DBConfig.dbQuery
+import com.keygenqt.autoway.extensions.Type
+import com.keygenqt.autoway.extensions.toJsonObject
+import com.keygenqt.autoway.extensions.toLike
+import org.slf4j.LoggerFactory
 
-class CommonService {
 
-    suspend fun getAll(table: String, limit: Int, offset: Int): String = newSuspendedTransaction {
-        val queryColumns = "SELECT name, type FROM PRAGMA_TABLE_INFO('$table')"
-        val query = "SELECT * FROM $table LIMIT $limit OFFSET $offset"
-        val columns = mutableMapOf<String, String>()
-        val result = JSONArray()
+class CommonService: BaseService() {
 
-        exec(queryColumns) { rs ->
-            while (rs.next()) {
-                columns[rs.getString("name")] = rs.getString("type").substringBefore("(").uppercase()
-            }
-        }
-
-        exec(query) { rs ->
-            while (rs.next()) {
-                val obj = JSONObject()
-                columns.forEach {
-                    when (it.value) {
-                        "INTEGER" -> obj[it.key] = rs.getInt(it.key)
-                        "VARCHAR" -> obj[it.key] = rs.getString(it.key)
-                    }
+    suspend fun find(table: String, limit: Int, offset: Int, search: String?): JsonArray? = dbQuery {
+        columns(table)?.let { columns ->
+            exec("SELECT * FROM $table ${columns.toLike(search)} LIMIT $limit OFFSET $offset") { rs ->
+                val array = JsonArray()
+                while (rs.next()) {
+                    array.add(columns.toJsonObject(rs))
                 }
-                result.add(obj)
+                return@exec array
             }
         }
+    }
 
-        val gson: Gson = GsonBuilder().setPrettyPrinting().create()
-        val jsonObjectAlt: JsonArray = JsonParser.parseString(result.toString()).asJsonArray
-        gson.toJson(jsonObjectAlt)
+    suspend fun getModel(table: String, id: String): JsonObject? = dbQuery {
+        columns(table)?.let { columns ->
+            pk(table)?.let { pk ->
+                exec("SELECT * FROM $table WHERE $pk='$id'") { rs ->
+                    while (rs.next()) {
+                        return@exec columns.toJsonObject(rs)
+                    }
+                    JsonObject()
+                }
+            }
+        }?.let { if (it.size() == 0) null else it }
     }
 }

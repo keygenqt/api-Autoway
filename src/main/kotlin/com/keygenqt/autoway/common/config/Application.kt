@@ -17,14 +17,14 @@
 package com.keygenqt.autoway.common.config
 
 import com.keygenqt.autoway.api.routing.apiRoute
+import com.keygenqt.autoway.common.base.ResponseError
 import com.keygenqt.autoway.common.di.moduleServicesDI
 import com.keygenqt.autoway.common.util.JsonMapper
 import com.keygenqt.autoway.frontend.routing.frontendRoute
-import com.keygenqt.autoway.frontend.views.site.error404
 import io.ktor.application.*
 import io.ktor.features.*
-import io.ktor.html.*
 import io.ktor.http.*
+import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.serialization.*
 import org.koin.core.context.startKoin
@@ -57,7 +57,10 @@ fun Application.module() {
     install(DefaultHeaders)
     install(StatusPages) {
         status(HttpStatusCode.NotFound) {
-            call.respondHtml(status = HttpStatusCode.NotFound) { error404() }
+            call.respond(
+                status = HttpStatusCode.NotFound,
+                message = ResponseError("Not Found")
+            )
         }
     }
 

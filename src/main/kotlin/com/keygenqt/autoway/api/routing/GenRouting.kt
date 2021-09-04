@@ -17,32 +17,34 @@
 package com.keygenqt.autoway.api.routing
 
 import com.keygenqt.autoway.common.service.CommonService
+import com.keygenqt.autoway.extensions.toPrettyString
 import io.ktor.application.*
-import io.ktor.request.*
+import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
-
 
 fun Route.genRoute() {
 
     val service: CommonService by inject()
 
-    route("/*") {
+    route("/{table}") {
         get {
+
             val search = call.parameters["search"]
             val limit = call.parameters["limit"]?.toIntOrNull() ?: -1
             val offset = call.parameters["offset"]?.toIntOrNull() ?: 0
-            call.respondText(service.getAll(call.request.uri.replace("/gen/", "").substringBefore("?"), limit, offset))
-        }
-        post {
 
+            call.parameters["table"]
+                ?.let { service.find(it, limit, offset, search) }
+                ?.let { call.respondText(it.toPrettyString()) }
+                ?: call.respond(HttpStatusCode.NotFound)
         }
-        put {
-
-        }
-        delete {
-
+        get("/{id}") {
+            call.parameters["table"]
+                ?.let { service.getModel(it, call.parameters["id"]!!) }
+                ?.let { call.respondText(it.toPrettyString()) }
+                ?: call.respond(HttpStatusCode.NotFound)
         }
     }
 }

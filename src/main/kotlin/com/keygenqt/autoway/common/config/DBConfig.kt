@@ -21,7 +21,9 @@ import com.keygenqt.autoway.common.util.Mode
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.flywaydb.core.Flyway
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -71,5 +73,12 @@ object DBConfig {
         log.info("Flyway migration has finished")
     }
 
-    suspend fun <T> dbQuery(block: suspend () -> T): T = newSuspendedTransaction { block() }
+    suspend fun <T> dbQuery(block: suspend Transaction.() -> T): T? = newSuspendedTransaction {
+        try {
+            block(this)
+        } catch (ex: ExposedSQLException) {
+            log.debug(ex.message)
+            null
+        }
+    }
 }

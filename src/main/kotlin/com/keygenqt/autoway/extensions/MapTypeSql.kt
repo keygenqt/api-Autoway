@@ -64,6 +64,20 @@ fun Map<String, Type>.toKeysList(p: Parameters): String? = map {
     }
 }
 
+fun Map<String, Type>.toSetList(p: Parameters): String? = map {
+    if (p.contains(it.key)) {
+        "${it.key}='${p[it.key].toString()}'"
+    } else {
+        null
+    }
+}.filterNotNull().let {
+    if (it.isEmpty()) {
+        null
+    } else {
+        it.joinToString(", ")
+    }
+}
+
 fun Map<String, Type>.toValuesList(p: Parameters): String? = map {
     if (p.contains(it.key)) {
         "'${p[it.key].toString()}'"

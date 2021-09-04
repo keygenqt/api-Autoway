@@ -61,6 +61,17 @@ fun Route.genRoute() {
                     }
                 }
         }
+        put("/{id}") {
+            call.parameters["table"]
+                ?.let { service.update(it, call.parameters["id"]!!, call.receiveParameters()) }
+                .let {
+                    when (it) {
+                        is JsonObject -> call.respondText(it.toPrettyString())
+                        is ResponseError -> call.respond(HttpStatusCode.UnprocessableEntity, it)
+                        else -> call.respond(HttpStatusCode.NotFound)
+                    }
+                }
+        }
         delete("/{id}") {
             call.parameters["table"]
                 ?.let { service.delete(it, call.parameters["id"]!!) }

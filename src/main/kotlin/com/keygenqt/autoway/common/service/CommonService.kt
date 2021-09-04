@@ -21,14 +21,9 @@ import com.google.gson.JsonObject
 import com.keygenqt.autoway.common.base.BaseService
 import com.keygenqt.autoway.common.base.ResponseError
 import com.keygenqt.autoway.common.config.DBConfig.dbQuery
-import com.keygenqt.autoway.extensions.toJsonObject
-import com.keygenqt.autoway.extensions.toKeysList
-import com.keygenqt.autoway.extensions.toLike
-import com.keygenqt.autoway.extensions.toValuesList
+import com.keygenqt.autoway.extensions.*
 import io.ktor.http.*
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
-import org.jetbrains.exposed.sql.transactions.transaction
-import org.sqlite.SQLiteException
 
 
 class CommonService : BaseService() {
@@ -78,19 +73,30 @@ class CommonService : BaseService() {
                 val values = columns.toValuesList(parameters)!!
                 try {
                     var id = ""
-
                     exec("insert into $table ($keys) values ($values)")
-
                     exec("select last_insert_rowid()") { rs ->
                         id = rs.getString("last_insert_rowid()")
                     }
-
                     commit()
-
                     getModel(table, id)
-
                 } catch (ex: Exception) {
                     ResponseError(ex.message ?: "Error model params")
+                }
+            }
+        }
+    }
+
+    suspend fun update(table: String, id: String, parameters: Parameters): Any? = newSuspendedTransaction {
+        columns(table)?.let { columns ->
+            pk(table)?.let { pk ->
+                columns.toSetList(parameters)?.let { set ->
+                    try {
+                        exec("update $table SET $set WHERE $pk=$id")
+                        commit()
+                        getModel(table, id)
+                    } catch (ex: Exception) {
+                        ResponseError(ex.message ?: "Error model params")
+                    }
                 }
             }
         }
